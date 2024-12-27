@@ -1,0 +1,30 @@
+{
+  "envelopes": [
+    {
+      "id": 1,
+      "title": "Bike rent",
+      "budget": 211
+    },
+    {
+      "id": 2,
+      "title": "New headset",
+      "budget": 60
+    },
+    {
+      "id": 3,
+      "title": "Home rent",
+      "budget": 400
+    },
+    {
+      "id": 4,
+      "title": "Phone",
+      "budget": 60
+    },
+    {
+      "id": 5,
+      "title": "Furniture",
+      "budget": 230
+    }
+  ],
+  "totalBudget": 961
+}

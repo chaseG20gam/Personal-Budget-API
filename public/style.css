@@ -1,0 +1,35 @@
+/* ../Work/Portfolio - Personal Budget API/main/public/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#envelopes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.envelope {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#form-container {
+    display: none;
+    text-align: center;
+}
