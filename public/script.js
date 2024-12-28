@@ -1,3 +1,4 @@
+// filepath: /c:/Users/fgne/Desktop/Adria/Work/Portfolio - Personal Budget API/main/public/script.js
 document.addEventListener('DOMContentLoaded', () => {
     const envelopesContainer = document.getElementById('envelopes-container');
     const formContainer = document.getElementById('form-container');
@@ -19,8 +20,27 @@ document.addEventListener('DOMContentLoaded', () => {
             envelopeDiv.innerHTML = `
                 <h3>${envelope.title}</h3>
                 <p>Budget: $${envelope.budget}</p>
+                <button class="edit-btn" data-id="${envelope.id}">Edit</button>
+                <button class="delete-btn" data-id="${envelope.id}">Delete</button>
             `;
             envelopesContainer.appendChild(envelopeDiv);
+        });
+
+        document.querySelectorAll('.edit-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                showEditForm(id);
+            });
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                const id = e.target.getAttribute('data-id');
+                await fetch(`/envelopes/${id}`, {
+                    method: 'DELETE'
+                });
+                fetchEnvelopes();
+            });
         });
     };
 
@@ -31,6 +51,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hideForm = () => {
         formContainer.style.display = 'none';
+    };
+
+    const showEditForm = async (id) => {
+        const response = await fetch(`/envelopes/${id}`);
+        const envelope = await response.json();
+        showForm(`
+            <h2>Edit Envelope</h2>
+            <form id="edit-envelope-form">
+                <input type="text" id="title" value="${envelope.title}" required>
+                <input type="number" id="budget" value="${envelope.budget}" required>
+                <button type="submit">Update</button>
+                <button type="button" id="cancel-btn">Cancel</button>
+            </form>
+        `);
+
+        document.getElementById('edit-envelope-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('title').value;
+            const budget = document.getElementById('budget').value;
+            await fetch(`/envelopes/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, budget })
+            });
+            hideForm();
+            fetchEnvelopes();
+        });
+
+        document.getElementById('cancel-btn').addEventListener('click', hideForm);
     };
 
     addEnvelopeBtn.addEventListener('click', () => {
