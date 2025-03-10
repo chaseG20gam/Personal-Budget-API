@@ -48,11 +48,11 @@ app.post('/envelopes', (req, res) => {
     const newEnvelope = {
         id: envelopes.length + 1,
         title,
-        budget,
+        budget: Number(budget), // Convert budget to a number
     };
 
     envelopes.push(newEnvelope);
-    totalBudget += budget;
+    totalBudget += newEnvelope.budget;
 
     saveEnvelopes(); // Save envelopes to the file
 
@@ -93,15 +93,15 @@ app.put('/envelopes/:id', (req, res) => {
 
     if (budget) {
         totalBudget -= envelope.budget;
-        envelope.budget = budget;
-        totalBudget += budget;
+        envelope.budget = Number(budget); // Convert budget to a number
+        totalBudget += envelope.budget;
     }
 
     if (amountToSubtract) {
         if (amountToSubtract > envelope.budget) {
             return res.status(400).send('Amount to subtract exceeds envelope budget');
         }
-        envelope.budget -= amountToSubtract;
+        envelope.budget -= Number(amountToSubtract); // Convert amountToSubtract to a number
         totalBudget -= amountToSubtract;
     }
 
@@ -152,8 +152,8 @@ app.post('/envelopes/transfer/:from/:to', (req, res) => {
         return res.status(400).send('Amount to transfer exceeds source envelope budget');
     }
 
-    fromEnvelope.budget -= amount;
-    toEnvelope.budget += amount;
+    fromEnvelope.budget -= Number(amount); // Convert amount to a number
+    toEnvelope.budget += Number(amount); // Convert amount to a number
 
     saveEnvelopes(); // Save envelopes to the file
 
@@ -178,13 +178,13 @@ app.post('/envelopes/distribute', (req, res) => {
         return res.status(400).send('One or more envelope IDs are invalid');
     }
 
-    const amountPerEnvelope = amount / validEnvelopes.length;
+    const amountPerEnvelope = Number(amount) / validEnvelopes.length; // Convert amount to a number
 
     validEnvelopes.forEach(envelope => {
         envelope.budget += amountPerEnvelope;
     });
 
-    totalBudget += amount;
+    totalBudget += Number(amount); // Convert amount to a number
 
     saveEnvelopes(); // Save envelopes to the file
 

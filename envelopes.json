@@ -3,28 +3,33 @@
     {
       "id": 1,
       "title": "Bike rent",
-      "budget": 211
+      "budget": "12110125"
     },
     {
       "id": 2,
       "title": "New headset",
-      "budget": 60
+      "budget": 195
     },
     {
       "id": 3,
       "title": "Home rent",
-      "budget": 400
+      "budget": 50125
     },
     {
       "id": 4,
       "title": "Phone",
-      "budget": 60
+      "budget": 185
     },
     {
       "id": 5,
       "title": "Furniture",
       "budget": 230
+    },
+    {
+      "id": 6,
+      "title": "Smoking",
+      "budget": "20"
     }
   ],
-  "totalBudget": 961
+  "totalBudget": "-30398050030500"
 }

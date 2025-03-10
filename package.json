@@ -1,4 +1,11 @@
 {
+  "name": "personal-budget-api",
+  "version": "1.0.0",
+  "description": "Personal Budget Web Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
   "dependencies": {
     "express": "^4.21.2"
   }
